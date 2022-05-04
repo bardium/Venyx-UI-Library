@@ -1036,7 +1036,7 @@ do
 			if text.Text == "Unknown" then -- new bind
 				text.Text = "..."
 
-				this.key = utility:KeyPressed()
+				this.key = utility:KeyPressed().KeyCode
 
 				self:updateKeybind(module)
 				animate()
