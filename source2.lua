@@ -132,12 +132,12 @@ do
 
 		self.keybinds[key] = self.keybinds[key] or {}
 
-		self.keybinds[key][#self.keybinds[key] + 1] = {callback = callback, gameProcessedEvent = gameProcessedEvent or false}
+		table.insert(self.keybinds[key], {callback = callback, gameProcessedEvent = gameProcessedEvent or false})
 
 		return {
 			UnBind = function()
-				for i, bind in pairs(self.keybinds[key]) do
-					if bind == callback then
+				for i, keybindData in pairs(self.keybinds[key]) do
+					if keybindData.callback == callback then
 						table.remove(self.keybinds[key], i)
 					end
 				end
@@ -460,10 +460,10 @@ do
 
 		themes[theme] = color3
 
-		for property, objects in pairs(objects[theme]) do
-			for i, object in pairs(objects) do
+		for property, objectss in pairs(objects[theme]) do
+			for i, object in pairs(objectss) do
 				if not object.Parent or (object.Name == "Button" and object.Parent.Name == "ColorPicker") then
-					objects[i] = nil -- i can do this because weak tables :D
+					objectss[i] = nil -- i can do this because weak tables :D
 				else
 					object[property] = color3
 				end
@@ -952,7 +952,7 @@ do
 		this.key = data.key or Enum.KeyCode.Unknown
 		this.gameProcessedEvent = data.gameProcessedEvent or false
 		this.callback = data.callback or function() end
-		this.changedCallback = data.changedCallback or function() end
+		this.changedCallback = data.changedCallback or function(key) end
 
 		local keybind = utility:Create("ImageButton", {
 			Name = "Keybind",
