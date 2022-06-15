@@ -306,6 +306,12 @@ do
 		}, library)
 	end
 
+	function library.setTitle(library, title)
+		local container = library.container
+		container.Name = title
+		container.Main.TopBar.Title.Text = title
+	end
+
 	function page.new(library, title, icon)
 		local button = utility:Create("TextButton", {
 			Name = title,
