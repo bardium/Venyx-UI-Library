@@ -436,7 +436,8 @@ do
 		local newPage = page.new(self, title, icon)
 		local button = newPage.button
 
-		self.pages[#self.pages + 1] = newPage
+		table.insert(self.pages, newPage)
+		library:reorderPageButtons()
 
 		button.MouseButton1Click:Connect(function()
 			self:SelectPage({
@@ -446,6 +447,23 @@ do
 		end)
 
 		return newPage
+	end
+
+	function page:setOrderPos(newPos)
+		local libraryPages = self.library.pages
+
+		if (newPos > #libraryPages) then
+			return error("newPos exceeds number of pages available")
+		end
+
+		local foundi = table.find(libraryPages, self)
+		if (foundi) then
+			table.remove(libraryPages, foundi)
+		end
+
+		table.insert(libraryPages, newPos, self)
+
+		self.library:reorderPageButtons()
 	end
 
 	function page:addSection(data)
@@ -459,6 +477,12 @@ do
 	end
 
 	-- functions
+
+	function library:reorderPageButtons()
+		for i, page in ipairs(self.pages) do
+			page.button.LayoutOrder = i
+		end
+	end
 
 	function library:setTheme(data)
 		local theme = data.theme
