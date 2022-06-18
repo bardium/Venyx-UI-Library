@@ -437,7 +437,7 @@ do
 		local button = newPage.button
 
 		table.insert(self.pages, newPage)
-		library:reorderPageButtons()
+		self:reorderPageButtons()
 
 		button.MouseButton1Click:Connect(function()
 			self:SelectPage({
