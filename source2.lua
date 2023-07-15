@@ -778,7 +778,7 @@ do
 
 	function section:addToggle(data)
 		local this = {}
-		 = data.title or "nil text"
+		this.title = data.title or "nil text"
 		this.toggled = data.default or false
 		this.callback = data.callback or function() end
 
