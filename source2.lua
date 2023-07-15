@@ -727,7 +727,7 @@ do
 				Size = UDim2.new(1, 0, 1, 0),
 				ZIndex = 3,
 				Font = Enum.Font.Gotham,
-				Text = this.title,
+				Text = ,
 				TextColor3 = themes.TextColor,
 				TextSize = 12,
 				TextTransparency = 0.10000000149012
@@ -778,7 +778,7 @@ do
 
 	function section:addToggle(data)
 		local this = {}
-		this.title = data.title or "nil text"
+		 = data.title or "nil text"
 		this.toggled = data.default or false
 		this.callback = data.callback or function() end
 
@@ -802,7 +802,7 @@ do
 				Size = UDim2.new(0.5, 0, 1, 0),
 				ZIndex = 3,
 				Font = Enum.Font.Gotham,
-				Text = this.title,
+				Text = ,
 				TextColor3 = themes.TextColor,
 				TextSize = 12,
 				TextTransparency = 0.10000000149012,
@@ -1091,7 +1091,7 @@ do
 
 	function section:addColorPicker(data)
 		local this = {}
-		this.title = data.title
+		this.title = data.title or "nil text"
 		this.default = data.default or Color3.new(255, 150, 150)
 		this.callback = data.callback or function() end
 
